@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:medlink_app/net/api_methods.dart';
+import 'package:medlink_app/net/flutterfire.dart';
 
 import 'add_view.dart';
 
@@ -66,15 +67,46 @@ class _HomeViewState extends State<HomeView> {
 
                 return ListView(
                   children: snapshot.data.docs.map((document) {
-                    return Container(
+                    return Padding(
+                      padding: EdgeInsets.only(top: 5.0, left: 15, right: 15),
+                    child: Container(
+                        width: MediaQuery.of(context).size.width/1.3,
+                        height: MediaQuery.of(context).size.height/12,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15.0),
+                          color: Colors.blue,
+                        ),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("Coin: ${document.id}"),
+                            SizedBox(
+                              width: 5.0,
+                            ),
                             Text(
-                                "Price: ${getValue(document.id, document.data()['Amount'])}"),
+                              "Coin: ${document.id}",
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.white
+                              ),
+                            ),
+                            Text(
+                              "\$${getValue(document.id, document.data()['Amount'])}",
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.white
+                              ),
+                            ),
+                            IconButton(
+                              icon: Icon(
+                                Icons.close,
+                                color: Colors.red,
+                              ),
+                              onPressed: () async {
+                                await removeCoin(document.id);
+                              },
+                            ),
                           ],
-                        ));
+                        )));
                   }).toList(),
                 );
               }),
