@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/profile/profile_pic.dart';
+import 'package:medlink_app/ui/profile/profile_pic.dart';
+
 
 
 class Body extends StatelessWidget {

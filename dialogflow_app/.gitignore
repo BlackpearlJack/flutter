@@ -10,7 +10,7 @@
 .svn/
 
 #assets
-.assets/chat1-u9x9.json
+/assets/chat1-u9x9.json
 
 # IntelliJ related
 *.iml

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../components/nav.dart';
+import '../../components/nav.dart';
 
 
 class WelcomeScreen extends StatelessWidget {

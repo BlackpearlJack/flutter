@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medlink_app/net/flutterfire.dart';
+import 'package:medlink_app/ui/screens/welcome_screen.dart';
 
 import 'home_view.dart';
 
@@ -74,7 +75,7 @@ class _AuthenticationState extends State<Authentication> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => HomeView(),
+                            builder: (context) => WelcomeScreen(),
                           ),
                         );
                       }
@@ -98,7 +99,7 @@ class _AuthenticationState extends State<Authentication> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => HomeView(),
+                          builder: (context) => WelcomeScreen(),
                         ),
                       );
                     }

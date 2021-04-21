@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:medlink_app/ui/authentication.dart';
+import 'file:///C:/Users/ICTA%20NOC/Documents/flutter/medlink_app/lib/ui/screens/welcome_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

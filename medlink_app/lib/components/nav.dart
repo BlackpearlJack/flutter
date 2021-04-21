@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/Screens/consults.dart';
-import 'package:flutter_app/Screens/more.dart';
-
-import '../Screens/home_screen.dart';
+import 'file:///C:/Users/ICTA%20NOC/Documents/flutter/medlink_app/lib/ui/screens/consults.dart';
+import 'file:///C:/Users/ICTA%20NOC/Documents/flutter/medlink_app/lib/ui/screens/home_screen.dart';
+import 'file:///C:/Users/ICTA%20NOC/Documents/flutter/medlink_app/lib/ui/screens/more.dart';
 
 
 class Nav extends StatefulWidget {
