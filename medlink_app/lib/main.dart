@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:medlink_app/ui/authentication.dart';
-import 'file:///C:/Users/ICTA%20NOC/Documents/flutter/medlink_app/lib/ui/screens/welcome_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:medlink_app/ui/access/sign_in_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,11 +14,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Crypto Wallet',
+      title: 'Medlink',
       theme: ThemeData(
+        textTheme: GoogleFonts.josefinSansTextTheme(Theme.of(context)
+            .textTheme),
         primarySwatch: Colors.blue,
       ),
-      home: Authentication(),
+      home: LoginScreen(),
     );
   }
 }

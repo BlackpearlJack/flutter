@@ -33,6 +33,10 @@ dependencies:
   cloud_firestore: "^0.16.0+1"
   http: "^0.12.2"
 
+  #Design
+  font_awesome_flutter: ^8.10.0
+  google_fonts: ^1.1.1
+
   flutter:
     sdk: flutter
 
@@ -60,7 +64,6 @@ flutter:
   assets:
     - assets/images/
     - assets/json/
-    - assets/appimages/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

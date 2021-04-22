@@ -16,6 +16,7 @@ class _AuthenticationState extends State<Authentication> {
   TextEditingController _emailField = TextEditingController();
   TextEditingController _passwordField = TextEditingController();
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,15 +71,12 @@ class _AuthenticationState extends State<Authentication> {
                   onPressed: () async {
                     bool shouldNavigate = await register(_emailField.text, _passwordField.text);
                     if (shouldNavigate) {
-                      // Navigate
-                      if (shouldNavigate) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => WelcomeScreen(),
-                          ),
-                        );
-                      }
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => WelcomeScreen(),
+                        ),
+                      );
                     }
                   },
                   child: Text("Register"),

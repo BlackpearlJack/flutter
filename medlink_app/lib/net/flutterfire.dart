@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 Future<bool> signIn(String email, String password) async {
   try{
@@ -65,3 +66,4 @@ Future<bool> removeCoin(String id) async {
       .delete();
   return true;
 }
+

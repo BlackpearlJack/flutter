@@ -36,7 +36,7 @@ class _ChatHomePageState extends State<ChatHomePage> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: AppBar(
-        title: Text("Chat Bot"),
+        title: Text("Contact Us"),
       ),
 
       body: Container(
