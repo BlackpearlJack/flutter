@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:medlink_app/components/constants.dart';
 
 class PasswordInput extends StatelessWidget {
@@ -7,14 +6,22 @@ class PasswordInput extends StatelessWidget {
     Key key,
     @required this.icon,
     @required this.hint,
-    this.inputType,
-    this.inputAction,
+    @required this.inputType,
+    @required this.inputAction,
+    @required this.validator,
+    @required this.passwordController,
+    @required this.passwordFocusNode,
+    @required this.label,
   }) : super(key: key);
 
   final IconData icon;
   final String hint;
   final TextInputType inputType;
   final TextInputAction inputAction;
+  final Function(String) validator;
+  final TextEditingController passwordController;
+  final FocusNode passwordFocusNode;
+  final String label;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -28,7 +35,13 @@ class PasswordInput extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
         ),
         child: Center(
-          child: TextField(
+          child: TextFormField(
+            controller: passwordController,
+            focusNode: passwordFocusNode,
+            keyboardType: inputType,
+            textInputAction: inputAction,
+            cursorColor: Colors.deepPurpleAccent,
+            validator: (value) => validator(value),
             decoration: InputDecoration(
               border: InputBorder.none,
               prefixIcon: Padding(
@@ -43,8 +56,6 @@ class PasswordInput extends StatelessWidget {
               hintStyle: kBodyText,
             ),
             obscureText: true,
-            keyboardType: inputType,
-            textInputAction: inputAction,
           ),
         ),
       ),

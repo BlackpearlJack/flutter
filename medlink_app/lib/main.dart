@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medlink_app/ui/access/sign_in_screen.dart';
 
+import 'ui/access/create_new_account.dart';
+import 'ui/access/forgot_password.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -20,7 +23,11 @@ class MyApp extends StatelessWidget {
             .textTheme),
         primarySwatch: Colors.blue,
       ),
-      home: LoginScreen(),
+      routes: {
+        '/' : (context) => LoginScreen(),
+        'ForgotPassword': (context) => ForgotPassword(),
+        'CreateNewAccount': (context) => CreateNewAccount(),
+      },
     );
   }
 }

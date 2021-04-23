@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:medlink_app/components/constants.dart';
 
 class TextInputField extends StatelessWidget {
@@ -7,14 +6,22 @@ class TextInputField extends StatelessWidget {
     Key key,
     @required this.icon,
     @required this.hint,
-    this.inputType,
-    this.inputAction,
+    @required this.inputType,
+    @required this.inputAction,
+    @required this.emailController,
+    @required this.emailFocusNode,
+    @required this.label,
+    @required this.validator,
   }) : super(key: key);
 
+  final TextEditingController emailController;
+  final FocusNode emailFocusNode;
   final IconData icon;
+  final String label;
   final String hint;
   final TextInputType inputType;
   final TextInputAction inputAction;
+  final Function(String) validator;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +36,13 @@ class TextInputField extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
         ),
         child: Center(
-          child: TextField(
+          child: TextFormField(
+            controller: emailController,
+            focusNode: emailFocusNode,
+            keyboardType: inputType,
+            textInputAction: inputAction,
+            cursorColor: Colors.deepPurpleAccent,
+            validator: (value) => validator(value),
             decoration: InputDecoration(
               border: InputBorder.none,
               prefixIcon: Padding(
@@ -43,8 +56,6 @@ class TextInputField extends StatelessWidget {
               hintText: hint,
               hintStyle: kBodyText,
             ),
-            keyboardType: inputType,
-            textInputAction: inputAction,
           ),
         ),
       ),

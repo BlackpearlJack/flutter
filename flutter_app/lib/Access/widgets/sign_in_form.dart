@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/Access/res/custom_colors.dart';
 import 'package:flutter_app/Access/screens/register_screen.dart';
-import 'package:flutter_app/Access/screens/user_info_screen.dart';
 import 'package:flutter_app/Access/utils/authentication.dart';
 import 'package:flutter_app/Access/utils/validator.dart';
 import 'package:flutter_app/Screens/welcome_screen.dart';
