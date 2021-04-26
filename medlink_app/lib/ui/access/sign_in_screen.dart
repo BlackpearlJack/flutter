@@ -1,13 +1,35 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:medlink_app/components/constants.dart';
+import 'package:medlink_app/ui/screens/welcome_screen.dart';
 import 'package:medlink_app/widgets/background_image.dart';
-import 'package:medlink_app/widgets/password_input.dart';
-import 'package:medlink_app/widgets/rounded_button.dart';
-import 'package:medlink_app/widgets/text_input_field.dart';
+import 'package:medlink_app/widgets/sign_in_form.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final FocusNode _emailFocusNode = FocusNode();
+  final FocusNode _passwordFocusNode = FocusNode();
+
+  Future<FirebaseApp> _initializeFirebase() async {
+    FirebaseApp firebaseApp = await Firebase.initializeApp();
+
+    User user = FirebaseAuth.instance.currentUser;
+
+    if (user != null) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => WelcomeScreen(),
+        ),
+      );
+    }
+
+    return firebaseApp;
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -33,53 +55,29 @@ class LoginScreen extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    TextInputField(
-                      icon: FontAwesomeIcons.envelope,
-                      hint: 'Email',
-                      inputType: TextInputType.emailAddress,
-                      inputAction: TextInputAction.next,
-                    ),
-                    PasswordInput(
-                      icon: FontAwesomeIcons.lock,
-                      hint: 'Password',
-                      inputAction: TextInputAction.done,
-                    ),
-                    GestureDetector(
-                      onTap: () => Navigator.pushNamed(context, 'ForgotPassword'),
-                      child: Text(
-                        'Forgot Password',
-                        style: kBodyText,
-                      ),
+                    FutureBuilder(
+                      future: _initializeFirebase(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasError) {
+                          return Text('Error initializing Firebase');
+                        } else if (snapshot.connectionState ==
+                            ConnectionState.done) {
+                          return SignInForm(
+                            emailFocusNode: _emailFocusNode,
+                            passwordFocusNode: _passwordFocusNode,
+                          );
+                        }
+                        return CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            Colors.deepPurpleAccent,
+                          ),
+                        );
+                      },
                     ),
                     SizedBox(
                       height: 25,
                     ),
-                    RoundedButton(buttonName: 'Login'),
-                    SizedBox(
-                      height: 25,
-                    ),
                   ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Don't have an account?",
-                      style: kBodyText,
-                    ),
-                    GestureDetector(
-                      onTap: () => Navigator.pushNamed(context, 'CreateNewAccount'),
-                      child: Text(
-                        'Sign Up',
-                        style: kBodyText.copyWith(
-                          color: kBlue,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
                 ),
               ],
             ),

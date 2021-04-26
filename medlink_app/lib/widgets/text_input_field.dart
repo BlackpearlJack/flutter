@@ -8,14 +8,14 @@ class TextInputField extends StatelessWidget {
     @required this.hint,
     @required this.inputType,
     @required this.inputAction,
-    @required this.emailController,
-    @required this.emailFocusNode,
+    @required this.controller,
+    @required this.focusNode,
     @required this.label,
     @required this.validator,
   }) : super(key: key);
 
-  final TextEditingController emailController;
-  final FocusNode emailFocusNode;
+  final TextEditingController controller;
+  final FocusNode focusNode;
   final IconData icon;
   final String label;
   final String hint;
@@ -37,8 +37,8 @@ class TextInputField extends StatelessWidget {
         ),
         child: Center(
           child: TextFormField(
-            controller: emailController,
-            focusNode: emailFocusNode,
+            controller: controller,
+            focusNode: focusNode,
             keyboardType: inputType,
             textInputAction: inputAction,
             cursorColor: Colors.deepPurpleAccent,

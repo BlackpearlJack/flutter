@@ -4,11 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:medlink_app/components/constants.dart';
 import 'package:medlink_app/widgets/background_image.dart';
-import 'package:medlink_app/widgets/password_input.dart';
-import 'package:medlink_app/widgets/rounded_button.dart';
-import 'package:medlink_app/widgets/text_input_field.dart';
+import 'package:medlink_app/widgets/register_form.dart';
 
-class CreateNewAccount extends StatelessWidget {
+class CreateNewAccount extends StatefulWidget {
+  @override
+  _CreateNewAccountState createState() => _CreateNewAccountState();
+}
+
+class _CreateNewAccountState extends State<CreateNewAccount> {
+  final FocusNode _nameFocusNode = FocusNode();
+  final FocusNode _emailFocusNode = FocusNode();
+  final FocusNode _passwordFocusNode = FocusNode();
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -16,114 +23,72 @@ class CreateNewAccount extends StatelessWidget {
       child: Stack(
         children: [
           BackgroundImage(image: 'assets/images/login_bg.png'),
-          Scaffold(
-            backgroundColor: Colors.transparent,
-            body: SingleChildScrollView(
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: size.width * 0.1,
-                  ),
-                  Stack(
-                    children: [
-                      Center(
-                        child: BackdropFilter(
-                          filter: ImageFilter.blur(
-                            sigmaX: 3,
-                            sigmaY: 3
-                          ),
-                          child: CircleAvatar(
-                            radius: size.width * 0.14,
-                            backgroundColor: Colors.grey[600]
-                                .withOpacity(0.4),
-                            child: Icon(
-                              FontAwesomeIcons.user,
-                              color: kWhite,
-                              size: size.width * 0.1,
+          GestureDetector(
+            onTap:() {
+              _nameFocusNode.unfocus();
+              _emailFocusNode.unfocus();
+              _passwordFocusNode.unfocus();
+            },
+            child: Scaffold(
+              backgroundColor: Colors.transparent,
+              body: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: size.width * 0.1,
+                    ),
+                    Stack(
+                      children: [
+                        Center(
+                          child: BackdropFilter(
+                            filter: ImageFilter.blur(
+                              sigmaX: 3,
+                              sigmaY: 3
                             ),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        top: size.height * 0.08,
-                        left: size.width * 0.56,
-                        child: Container(
-                          height: size.width * 0.1,
-                          width: size.width * 0.1,
-                          decoration: BoxDecoration(
-                            color: kBlue,
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: kWhite,
-                              width: 2
-                            )
-                          ),
-                          child: Icon(
-                            FontAwesomeIcons.arrowUp,
-                            color: kWhite,
-                          ),
-                        )
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: size.width * 0.1,
-                  ),
-                  Column(
-                    children: [
-                      TextInputField(
-                        icon: FontAwesomeIcons.user,
-                        hint: 'User',
-                        inputType: TextInputType.name,
-                        inputAction: TextInputAction.next,
-                      ),
-                      TextInputField(
-                        icon: FontAwesomeIcons.envelope,
-                        hint: 'Email',
-                        inputType: TextInputType.emailAddress,
-                        inputAction: TextInputAction.next,
-                      ),
-                      PasswordInput(
-                        icon: FontAwesomeIcons.lock,
-                        hint: 'Password',
-                        inputAction: TextInputAction.next,
-                      ),
-                      PasswordInput(
-                        icon: FontAwesomeIcons.lock,
-                        hint: 'Confirm Password',
-                        inputAction: TextInputAction.done,
-                      ),
-                      SizedBox(
-                        height: 25,
-                      ),
-                      RoundedButton(buttonName: 'Register'),
-                      SizedBox(
-                        height: 25,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Already have an account?',
-                            style: kBodyText,
-                          ),
-                          GestureDetector(
-                            onTap: () => Navigator.pushNamed(context, '/'),
-                            child: Text(
-                              'Login',
-                              style: kBodyText.copyWith(
-                                color: kBlue,
+                            child: CircleAvatar(
+                              radius: size.width * 0.14,
+                              backgroundColor: Colors.grey[600]
+                                  .withOpacity(0.4),
+                              child: Icon(
+                                FontAwesomeIcons.user,
+                                color: kWhite,
+                                size: size.width * 0.1,
                               ),
                             ),
                           ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 20,
-                      )
-                    ],
-                  )
-                ],
+                        ),
+                        Positioned(
+                          top: size.height * 0.08,
+                          left: size.width * 0.56,
+                          child: Container(
+                            height: size.width * 0.1,
+                            width: size.width * 0.1,
+                            decoration: BoxDecoration(
+                              color: kBlue,
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: kWhite,
+                                width: 2
+                              )
+                            ),
+                            child: Icon(
+                              FontAwesomeIcons.arrowUp,
+                              color: kWhite,
+                            ),
+                          )
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: size.width * 0.1,
+                    ),
+                    RegisterForm(
+                        nameFocusNode: _nameFocusNode,
+                        emailFocusNode: _emailFocusNode,
+                        passwordFocusNode: _passwordFocusNode
+                    )
+                  ],
+                ),
               ),
             ),
           )

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:medlink_app/components/constants.dart';
 import 'package:medlink_app/net/flutterfire.dart';
-import 'package:medlink_app/ui/authentication.dart';
+import 'package:medlink_app/ui/screens/welcome_screen.dart';
 import 'package:medlink_app/utils/validator.dart';
 import 'package:medlink_app/widgets/password_input.dart';
 import 'package:medlink_app/widgets/rounded_button.dart';
@@ -37,80 +37,98 @@ class _SignInFormState extends State<SignInForm> {
       key: _signInFormKey,
         child: Column(
           children: [
-            Flexible(
-              child: Center(
-                child: Text(
-                  'Medlink',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 40,
-                      fontWeight: FontWeight.bold
+            Padding(
+              padding: const EdgeInsets.only(
+                left:8.0,
+                right: 8.0,
+                bottom: 24.0
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  TextInputField(
+                    icon: FontAwesomeIcons.envelope,
+                    controller: _emailController,
+                    focusNode: widget.emailFocusNode,
+                    inputType: TextInputType.emailAddress,
+                    inputAction: TextInputAction.next,
+
+                    label: 'Email',
+                    hint: 'Enter your email',
+                      validator: (value) => Validator.validateEmail(
+                        email: value,
+                      ),
                   ),
-                ),
+                  SizedBox(
+                    height: 16.0
+                  ),
+                  PasswordInput(
+                    icon: FontAwesomeIcons.lock,
+                    passwordController: _passwordController,
+                    passwordFocusNode: widget.passwordFocusNode,
+                    inputType: TextInputType.text,
+                    hint: 'Enter your password',
+                    label: 'Password',
+                    validator: (value) => Validator.validatePassword(
+                      password: value,
+                    ),
+                    inputAction: TextInputAction.done,
+                  ),
+                  GestureDetector(
+                    onTap: () => Navigator.pushNamed(context, 'ForgotPassword'),
+                    child: Text(
+                      'Forgot Password',
+                      style: kBodyText.copyWith(
+                        color: kPrimaryLightColor
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                TextInputField(
-                  icon: FontAwesomeIcons.lock,
-                  emailController: _emailController,
-                  emailFocusNode: widget.emailFocusNode,
-                  inputType: TextInputType.text,
-                  inputAction: TextInputAction.done,
-
-                  label: 'Password',
-                  hint: 'Enter your password',
-                    validator: (value) => Validator.validateEmail(
-                      email: value,
-                    ),
-                ),
-                PasswordInput(
-                  icon: FontAwesomeIcons.lock,
-                  passwordController: _passwordController,
-                  passwordFocusNode: widget.passwordFocusNode,
-                  inputType: TextInputType.text,
-                  hint: 'Enter your password',
-                  label: 'Password',
-                  validator: (value) => Validator.validatePassword(
-                    password: value,
+            _isSigningIn
+              ? Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    Colors.deepPurpleAccent,
                   ),
-                  inputAction: TextInputAction.done,
-                ),
-                GestureDetector(
-                  onTap: () => Navigator.pushNamed(context, 'ForgotPassword'),
-                  child: Text(
-                    'Forgot Password',
-                    style: kBodyText,
+                )
+              )
+              : Padding(
+                 padding: EdgeInsets.only(left: 0.0, right: 0.0),
+                  child: RoundedButton(
+                    buttonName: 'Login',
+                    on_pressed: () async {
+                      widget.emailFocusNode.unfocus();
+                      widget.passwordFocusNode.unfocus();
+
+                      setState(() {
+                        _isSigningIn = true;
+                      });
+
+                      if(_signInFormKey.currentState.validate()){
+                        User user = await NetAuthentication.signInUsingEmailPassword(
+                          context: context,
+                          email: _emailController.text,
+                          password: _passwordController.text,
+                        );
+
+                        if(user != null){
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                  builder: (context) => WelcomeScreen()
+                              )
+                          );
+                        }
+                      }
+
+                      setState(() {
+                        _isSigningIn = false;
+                      });
+                    },
                   ),
-                ),
-                SizedBox(
-                  height: 25,
-                ),
-                RoundedButton(
-                  buttonName: 'Login',
-                  on_pressed: () async {
-                    widget.emailFocusNode.unfocus();
-                    widget.passwordFocusNode.unfocus();
-
-                    setState(() {
-                      _isSigningIn = true;
-                    });
-
-                    if(_signInFormKey.currentState.validate()){
-                      User user = await NetAuthentication.signInUsingEmailPassword(
-                        context: context,
-                        email: _emailController.text,
-                        password: _passwordController.text,
-                      );
-                    }
-                  },
-                ),
-                SizedBox(
-                  height: 25,
-                ),
-              ],
-            ),
+              ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

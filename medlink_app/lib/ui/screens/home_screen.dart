@@ -1,16 +1,20 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:medlink_app/components/constants.dart';
 import 'package:medlink_app/ui/profile/profile_screen.dart';
 
 import 'contact_screen.dart';
 
 
 class Home extends StatefulWidget {
+
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
+  User user;
 
   Widget _selectedExtras({String image,String name }){
     return Container(
@@ -37,6 +41,7 @@ class _HomeState extends State<Home> {
     );
   }
 
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -45,14 +50,17 @@ class _HomeState extends State<Home> {
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.teal,
-          title: Text(
-            'Hello, '
-                'Ella',
-            style: TextStyle(
-              color: Colors.black,
-              fontFamily: 'Montserrat',
-              fontWeight: FontWeight.bold,
-            ),
+          title: Row(
+            children: [
+              Text(
+                'Hello  ',
+                style: kBodyText,
+              ),
+              Text(
+                'World',
+                style: kBodyText
+              ),
+            ],
           ),
           actions: <Widget>[
             IconButton(
