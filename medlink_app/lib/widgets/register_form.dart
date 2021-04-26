@@ -161,7 +161,7 @@ class _RegisterFormState extends State<RegisterForm> {
                 style: kBodyText,
               ),
               GestureDetector(
-                onTap: () => Navigator.pushNamed(context, 'CreateNewAccount'),
+                onTap: () => Navigator.pushNamed(context, '/'),
                 child: Text(
                   'Login',
                   style: kBodyText.copyWith(
