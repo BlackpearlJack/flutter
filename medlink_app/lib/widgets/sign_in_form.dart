@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:medlink_app/components/constants.dart';
 import 'package:medlink_app/net/flutterfire.dart';
+import 'package:medlink_app/ui/access/create_new_account.dart';
+import 'package:medlink_app/ui/access/forgot_password.dart';
 import 'package:medlink_app/ui/screens/welcome_screen.dart';
 import 'package:medlink_app/utils/validator.dart';
 import 'package:medlink_app/widgets/password_input.dart';
@@ -75,7 +77,11 @@ class _SignInFormState extends State<SignInForm> {
                     inputAction: TextInputAction.done,
                   ),
                   GestureDetector(
-                    onTap: () => Navigator.pushNamed(context, 'ForgotPassword'),
+                    onTap: () => Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                            builder: (context) => ForgotPassword()
+                        )
+                    ),
                     child: Text(
                       'Forgot Password',
                       style: kBodyText.copyWith(
@@ -137,7 +143,11 @@ class _SignInFormState extends State<SignInForm> {
                   style: kBodyText,
                 ),
                 GestureDetector(
-                  onTap: () => Navigator.pushNamed(context, 'CreateNewAccount'),
+                  onTap: () => Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                          builder: (context) => CreateNewAccount()
+                      )
+                  ),
                   child: Text(
                     'Sign Up',
                     style: kBodyText.copyWith(

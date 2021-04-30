@@ -33,23 +33,17 @@ class _HomeScreenStateState extends State<HomeScreenState> {
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                        "Best waves for",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 22,
-                            letterSpacing: 2
-                        )
-                    ),
-                    Text(
-                        ".surfing",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 50,
-                            fontWeight: FontWeight.bold
-                        )
-                    ),
+                  children: <Widget>[
+                    FadeAnimation(2.4,Text("Best waves for", style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 22,
+                        letterSpacing: 2
+                    ))),
+                    FadeAnimation(2.6,Text(".surfing", style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 50,
+                        fontWeight: FontWeight.bold
+                    ))),
                   ],
                 ),
 

@@ -36,6 +36,7 @@ dependencies:
   #Design
   font_awesome_flutter: ^8.10.0
   google_fonts: ^1.1.1
+  flutter_svg: ^0.22.0
 
   flutter:
     sdk: flutter
@@ -64,6 +65,7 @@ flutter:
   assets:
     - assets/images/
     - assets/json/
+    - assets/svg/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
